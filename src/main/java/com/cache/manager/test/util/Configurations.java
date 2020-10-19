@@ -13,11 +13,16 @@ public class Configurations {
     private String cacheLevelTwoStrategy;
 
     @Value("${cache.level.one.status}")
-    private String cacheLevelOneStatus;
+    private boolean cacheLevelOneIsActive;
 
     @Value("${cache.level.two.status}")
-    private String cacheLevelTwoStatus;
+    private boolean cacheLevelTwoIsActive;
 
+    @Value("${cache.level.one.capacity}")
+    private int cacheLevelOneCapacity;
+
+    @Value("${cache.level.two.capacity}")
+    private int cacheLevelTwoCapacity;
 
 
     public String getCacheLevelOneStrategy() {
@@ -28,11 +33,21 @@ public class Configurations {
         return cacheLevelTwoStrategy;
     }
 
-    public String getCacheLevelOneStatus() {
-        return cacheLevelOneStatus;
+    public boolean getCacheLevelOneIsActive() {
+        return cacheLevelOneIsActive;
     }
 
-    public String getCacheLevelTwoStatus() {
-        return cacheLevelTwoStatus;
+    public boolean getCacheLevelTwoIsActive() {
+        return cacheLevelTwoIsActive;
     }
+
+    public int isCacheLevelOneCapacity() {
+        return cacheLevelOneCapacity;
+    }
+
+    public int isCacheLevelTwoCapacity() {
+        return cacheLevelTwoCapacity;
+    }
+
+
 }
