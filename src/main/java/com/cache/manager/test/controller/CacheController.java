@@ -19,7 +19,7 @@ public class CacheController {
      */
     @GetMapping("/cache/{key}")
     public CacheDto getCache(@PathVariable String key) {
-        return null;
+        return cacheService.getCache(key);
     }
 
     /**
@@ -28,6 +28,6 @@ public class CacheController {
      */
     @PostMapping("/cache")
     public void saveCache(CacheDto cacheDto) {
-
+        cacheService.saveCache(cacheDto);
     }
 }

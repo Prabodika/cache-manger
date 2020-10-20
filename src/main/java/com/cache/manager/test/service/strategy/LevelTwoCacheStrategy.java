@@ -3,6 +3,7 @@ package com.cache.manager.test.service.strategy;
 
 import com.cache.manager.test.dao.FileCacheDao;
 import com.cache.manager.test.dao.impl.*;
+import com.cache.manager.test.exception.UnsupportedStrategyException;
 import com.cache.manager.test.util.Configurations;
 import com.cache.manager.test.util.LevelTwoCacheStrategyName;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,11 @@ public class LevelTwoCacheStrategy {
      * @return
      */
     public FileCacheDao findStrategy(LevelTwoCacheStrategyName strategyName) {
-        return strategies.get(strategyName);
+        FileCacheDao fileCacheDao= strategies.get(strategyName);
+        if(null==fileCacheDao){
+            throw new UnsupportedStrategyException();
+        }
+        return fileCacheDao;
 
     }
 
@@ -46,7 +51,6 @@ public class LevelTwoCacheStrategy {
         strategies.put(lfu.getStrategyName(), lfu);
         FileSystemLruCacheDaoImpl lru= new FileSystemLruCacheDaoImpl(configurations.getCacheLevelTwoCapacity());
         strategies.put(lru.getStrategyName(),lru );
-        strategies = new HashMap<>();
 
     }
 }

@@ -2,6 +2,7 @@ package com.cache.manager.test.util;
 
 
 import com.cache.manager.test.domain.CacheDomain;
+import com.cache.manager.test.exception.FileException;
 
 import java.io.*;
 
@@ -40,8 +41,10 @@ public class FileDataWriter {
             objectOutputStream.close();
 
 
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
+        }
+        //todo: need to implement exception hierarchy
+        catch (Exception  e) {
+            throw new FileException();
         }
     }
 
@@ -68,9 +71,10 @@ public class FileDataWriter {
             fileinputStream.close();
 
 
-        } catch (FileNotFoundException e) {
-        } catch (IOException e) {
-        } catch (ClassNotFoundException e) {
+        }
+        //todo: need to implement exception hierarchy
+        catch (Exception  e) {
+            throw new FileException();
         }
         return data;
     }

@@ -1,8 +1,10 @@
 package com.cache.manager.test.service.strategy;
 
+import com.cache.manager.test.dao.FileCacheDao;
 import com.cache.manager.test.dao.ObjectCacheDao;
 import com.cache.manager.test.dao.impl.LfuObjectCacheDaoImpl;
 import com.cache.manager.test.dao.impl.LruObjectCacheDaoImpl;
+import com.cache.manager.test.exception.UnsupportedStrategyException;
 import com.cache.manager.test.util.Configurations;
 import com.cache.manager.test.util.LevelOneCacheStrategyName;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +35,13 @@ public class LevelOneCacheStrategy {
      * @return
      */
     public ObjectCacheDao findStrategy(LevelOneCacheStrategyName strategyName) {
-        return strategies.get(strategyName);
 
+        ObjectCacheDao ObjectCacheDao= strategies.get(strategyName);
+        if(null==ObjectCacheDao){
+            throw new UnsupportedStrategyException();
+        }
+
+        return ObjectCacheDao;
     }
 
     /**

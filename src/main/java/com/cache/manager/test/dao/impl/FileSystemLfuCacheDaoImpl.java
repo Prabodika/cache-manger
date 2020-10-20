@@ -55,7 +55,7 @@ public class FileSystemLfuCacheDaoImpl implements FileCacheDao {
 
             LinkedList<String> frqKeyListNextFrq = frequency_keyList.get(frq + 1);
 
-            if (frqKeyListNextFrq.isEmpty()) {
+            if (frqKeyListNextFrq==null) {
                 frqKeyListNextFrq = new LinkedList<>();
                 frqKeyListNextFrq.add(key);
                 frequency_keyList.put(frq + 1, frqKeyListNextFrq);
