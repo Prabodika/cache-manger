@@ -41,11 +41,11 @@ public class Configurations {
         return cacheLevelTwoIsActive;
     }
 
-    public int isCacheLevelOneCapacity() {
+    public int getCacheLevelOneCapacity() {
         return cacheLevelOneCapacity;
     }
 
-    public int isCacheLevelTwoCapacity() {
+    public int getCacheLevelTwoCapacity() {
         return cacheLevelTwoCapacity;
     }
 

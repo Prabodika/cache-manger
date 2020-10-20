@@ -2,8 +2,8 @@ package com.cache.manager.test.service.strategy;
 
 
 import com.cache.manager.test.dao.FileCacheDao;
-import com.cache.manager.test.dao.impl.FileSystemLfuCacheDaoImpl;
-import com.cache.manager.test.dao.impl.FileSystemLruCacheDaoImpl;
+import com.cache.manager.test.dao.impl.*;
+import com.cache.manager.test.util.Configurations;
 import com.cache.manager.test.util.LevelTwoCacheStrategyName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,10 +14,13 @@ import java.util.Map;
 @Component
 public class LevelTwoCacheStrategy {
 
+    private Configurations configurations;
+
     private Map<LevelTwoCacheStrategyName, FileCacheDao> strategies;
 
     @Autowired
-    public LevelTwoCacheStrategy() {
+    public LevelTwoCacheStrategy(Configurations configurations) {
+        this.configurations=configurations;
         createStrategy();
 
     }
@@ -37,9 +40,13 @@ public class LevelTwoCacheStrategy {
      * This method initialize level two cache strategies
      */
     private void createStrategy() {
+
         strategies = new HashMap<>();
-        strategies.put(FileSystemLruCacheDaoImpl.getInstance().getStrategyName(), FileSystemLruCacheDaoImpl.getInstance());
-        strategies.put(FileSystemLfuCacheDaoImpl.getInstance().getStrategyName(), FileSystemLfuCacheDaoImpl.getInstance());
+        FileSystemLfuCacheDaoImpl lfu= new FileSystemLfuCacheDaoImpl(configurations.getCacheLevelTwoCapacity());
+        strategies.put(lfu.getStrategyName(), lfu);
+        FileSystemLruCacheDaoImpl lru= new FileSystemLruCacheDaoImpl(configurations.getCacheLevelTwoCapacity());
+        strategies.put(lru.getStrategyName(),lru );
+        strategies = new HashMap<>();
 
     }
 }

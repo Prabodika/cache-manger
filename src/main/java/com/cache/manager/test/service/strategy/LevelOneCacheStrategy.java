@@ -3,6 +3,7 @@ package com.cache.manager.test.service.strategy;
 import com.cache.manager.test.dao.ObjectCacheDao;
 import com.cache.manager.test.dao.impl.LfuObjectCacheDaoImpl;
 import com.cache.manager.test.dao.impl.LruObjectCacheDaoImpl;
+import com.cache.manager.test.util.Configurations;
 import com.cache.manager.test.util.LevelOneCacheStrategyName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,11 +14,14 @@ import java.util.Map;
 @Component
 public class LevelOneCacheStrategy {
 
+    private Configurations configurations;
 
     private Map<LevelOneCacheStrategyName, ObjectCacheDao> strategies;
 
     @Autowired
-    public LevelOneCacheStrategy() {
+    public LevelOneCacheStrategy(Configurations configurations) {
+
+        this.configurations=configurations;
         createStrategy();
 
     }
@@ -38,8 +42,10 @@ public class LevelOneCacheStrategy {
      */
     private void createStrategy() {
         strategies = new HashMap<>();
-        strategies.put(LfuObjectCacheDaoImpl.getInstance().getStrategyName(), LfuObjectCacheDaoImpl.getInstance());
-        strategies.put(LruObjectCacheDaoImpl.getInstance().getStrategyName(), LruObjectCacheDaoImpl.getInstance());
+        LfuObjectCacheDaoImpl lfu= new LfuObjectCacheDaoImpl(configurations.getCacheLevelOneCapacity());
+        strategies.put(lfu.getStrategyName(), lfu);
+        LruObjectCacheDaoImpl lru= new LruObjectCacheDaoImpl(configurations.getCacheLevelOneCapacity());
+        strategies.put(lru.getStrategyName(),lru );
 
     }
 

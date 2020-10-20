@@ -26,9 +26,6 @@ public class CacheServiceImpl implements CacheService {
     private Configurations configurations;
 
 
-
-
-
     /**
      * This method get cache details by key
      * @param key : key to get cache details
@@ -43,7 +40,7 @@ public class CacheServiceImpl implements CacheService {
             ObjectCacheDao objectCacheDao= levelOneCacheStrategy.findStrategy(strategyName);
             domain= objectCacheDao.getCache(key);
         }
-        if(configurations.getCacheLevelTwoIsActive()||(null==domain)){
+        if(configurations.getCacheLevelTwoIsActive()||(configurations.getCacheLevelTwoIsActive()&&(null==domain))){
             LevelTwoCacheStrategyName strategyTwo= LevelTwoCacheStrategyName.getEnumByName(configurations.getCacheLevelTwoStrategy());
             FileCacheDao dao= levelTwoCacheStrategy.findStrategy(strategyTwo);
             domain= dao.getCache(key);

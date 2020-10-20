@@ -1,5 +1,6 @@
 package com.cache.manager.test;
 
+import com.cache.manager.test.dto.CacheDto;
 import com.cache.manager.test.service.CacheService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -18,8 +19,6 @@ public class TestApplication  implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-
-		cacheService.getCache("abc");
 
 	}
 }
