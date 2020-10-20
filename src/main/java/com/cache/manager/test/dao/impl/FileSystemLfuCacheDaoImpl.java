@@ -23,6 +23,8 @@ public class FileSystemLfuCacheDaoImpl implements FileCacheDao {
         key_Filename = new HashMap<>();
         key_frequency = new HashMap<>();
         frequency_keyList = new HashMap<>();
+        frequency_keyList.put(1, new LinkedList<>());
+
     }
 
 
@@ -101,10 +103,6 @@ public class FileSystemLfuCacheDaoImpl implements FileCacheDao {
             //file name and the key are both same
             key_Filename.put(key, key);
             key_frequency.put(key, min);
-
-            if (frequency_keyList.get(min).isEmpty()) {
-                frequency_keyList.put(min, new LinkedList<>());
-            }
             frequency_keyList.get(min).addLast(key);
             FileDataWriter.getInstance().writeToFile(key, domain);
 

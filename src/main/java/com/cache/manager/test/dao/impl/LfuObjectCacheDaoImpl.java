@@ -21,6 +21,7 @@ public class LfuObjectCacheDaoImpl implements ObjectCacheDao {
         key_values = new HashMap<>();
         key_frequency = new HashMap<>();
         frequency_keyList = new HashMap<>();
+        frequency_keyList.put(1, new LinkedList<>());
     }
 
 
@@ -76,12 +77,7 @@ public class LfuObjectCacheDaoImpl implements ObjectCacheDao {
             min = 1;
             key_values.put(key, domain);
             key_frequency.put(key, min);
-
-            //add new list for the first time
-            if (frequency_keyList.get(1).isEmpty()) {
-                frequency_keyList.put(1, new LinkedList<>());
-            }
-            frequency_keyList.get(1).add(key);
+            frequency_keyList.get(min).addLast(key);
 
 
         }
