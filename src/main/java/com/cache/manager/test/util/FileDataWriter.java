@@ -44,7 +44,7 @@ public class FileDataWriter {
         }
         //todo: need to implement exception hierarchy
         catch (Exception  e) {
-            throw new FileException();
+            throw new FileException(e.getMessage());
         }
     }
 
@@ -74,7 +74,7 @@ public class FileDataWriter {
         }
         //todo: need to implement exception hierarchy
         catch (Exception  e) {
-            throw new FileException();
+            throw new FileException(e.getMessage());
         }
         return data;
     }

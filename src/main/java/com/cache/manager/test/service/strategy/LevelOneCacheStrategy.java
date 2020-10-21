@@ -38,7 +38,7 @@ public class LevelOneCacheStrategy {
 
         ObjectCacheDao ObjectCacheDao= strategies.get(strategyName);
         if(null==ObjectCacheDao){
-            throw new UnsupportedStrategyException();
+            throw new UnsupportedStrategyException("Unsupported Level one cache");
         }
 
         return ObjectCacheDao;

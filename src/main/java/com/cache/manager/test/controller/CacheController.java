@@ -1,6 +1,7 @@
 package com.cache.manager.test.controller;
 
 import com.cache.manager.test.dto.CacheDto;
+import com.cache.manager.test.exception.NotFoundException;
 import com.cache.manager.test.service.CacheService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,11 @@ public class CacheController {
      */
     @GetMapping("/cache/{key}")
     public CacheDto getCache(@PathVariable String key) {
-        return cacheService.getCache(key);
+        CacheDto dto= cacheService.getCache(key);
+        if(dto==null){
+           throw new NotFoundException("No data found for given key" +key);
+        }
+        return  dto;
     }
 
     /**

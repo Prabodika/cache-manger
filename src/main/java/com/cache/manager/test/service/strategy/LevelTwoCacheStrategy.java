@@ -35,7 +35,7 @@ public class LevelTwoCacheStrategy {
     public FileCacheDao findStrategy(LevelTwoCacheStrategyName strategyName) {
         FileCacheDao fileCacheDao= strategies.get(strategyName);
         if(null==fileCacheDao){
-            throw new UnsupportedStrategyException();
+            throw new UnsupportedStrategyException("Unsupported level 2 cache");
         }
         return fileCacheDao;
 
