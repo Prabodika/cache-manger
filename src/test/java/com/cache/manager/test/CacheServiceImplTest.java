@@ -30,7 +30,7 @@ public class CacheServiceImplTest extends TestApplicationTests {
     }
 
    /*
-     To run a specific scenario only remove the @Ignore tag  of given  scenario
+     To run a specific scenario only remove the @Ignore tag  of given  scenario all others should have the @Ignore
    */
 
 
@@ -53,7 +53,6 @@ public class CacheServiceImplTest extends TestApplicationTests {
     cache.level.two.capacity:3
      */
     @Test
-    @Ignore
     public  void testLruObjectCacheIntigration(){
 
             CacheDto dto1 = new CacheDto();
@@ -214,6 +213,7 @@ public class CacheServiceImplTest extends TestApplicationTests {
     cache.level.two.strategy:lfu
     cache.level.two.capacity:3
     */
+    @Ignore
     @Test
     public  void testLfuFileCacheIntigration(){
 
